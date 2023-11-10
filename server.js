@@ -16,3 +16,5 @@ dbConnect().catch((err) => console.log(err));
 
 const port = process.env.PORT || 3000;
 app.listen(port);
+
+//TEST

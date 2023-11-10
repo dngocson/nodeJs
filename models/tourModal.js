@@ -83,7 +83,7 @@ const tourSchema = new mongoose.Schema(
   }
 );
 
-// // DOCUMENT MIDDLEWARE : RUN before .save and .create
+// DOCUMENT MIDDLEWARE : RUN before .save and .create
 // tourSchema.pre("save", function (next) {
 //   this.slug = slugify(this.name, {
 //     lower: true,
@@ -91,12 +91,29 @@ const tourSchema = new mongoose.Schema(
 //   next();
 // });
 
-// // DOCUMENT MIDDLEWARE : RUN before .save and .create
+// DOCUMENT MIDDLEWARE : RUN before .save and .create
 // tourSchema.post("save", function (doc, next) {
 //   console.log(doc)
 //   next();
 // });
 
+// QUERY MIDDLEWARE : RUN BEFORE QUERY
+// tourSchema.pre(/^find/, function (next) {
+//   this.find({
+//     secretTour: { $ne: true },
+//   });
+//   next();
+// });
+
+// AGGREGATION MIDDLEWARE
+// tourSchema.pre("aggregate", function (next) {
+//   this.pipeline().unshift({
+//     $match: { secretTour: { $ne: true } },
+//   });
+//   next();
+// });
+
+// VIRTUAL
 tourSchema.virtual("durationWeeks").get(function () {
   return this.duration / 7;
 });
